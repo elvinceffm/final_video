@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iris KNN - Baseline Deck</title>
+  <link rel="stylesheet" href="iris_knn_deck.css">
+</head>
+<body>
+<main class="deck" aria-label="Iris KNN baseline slide deck">
+  <section class="slide">
+    <div class="shell">
+      <div class="eyebrow">Iris Species · KNN classification</div>
+      <div class="bar"></div>
+      <h1 class="title">How KNN separates three flower species</h1>
+      <p class="subtitle">A clean 5-minute story about similarity, class boundaries, and why k = 5 gave us the best balance for Iris.</p>
+      <div class="tagline">
+        <span class="chip">Kaggle dataset</span>
+        <span class="chip">3 classes</span>
+        <span class="chip">4 numeric predictors</span>
+        <span class="chip">Browser-first slides</span>
+      </div>
+      <div class="metrics">
+        <div class="metric"><div class="value">150</div><div class="label">Rows</div></div>
+        <div class="metric"><div class="value">3</div><div class="label">Species</div></div>
+        <div class="metric"><div class="value">4</div><div class="label">Predictors</div></div>
+        <div class="metric"><div class="value">60/40</div><div class="label">Train / test split</div></div>
+      </div>
+    </div>
+    <div class="footer"><span class="brand">Kami-inspired baseline deck</span><span class="page">01 / 06</span></div>
+  </section>
+
+  <section class="slide">
+    <div class="shell grid-2">
+      <div class="panel">
+        <span class="eyebrow">Dataset</span>
+        <h2>Three iris species, one very explainable classification story</h2>
+        <p class="lead">We picked Iris because it is small, clean, and immediately visual. That makes it ideal for showing how KNN votes by similarity instead of by a complex formula.</p>
+        <div class="metrics" style="grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 8px;">
+          <div class="metric"><div class="value">Setosa</div><div class="label">Easy to separate</div></div>
+          <div class="metric"><div class="value">Versicolor / Virginica</div><div class="label">Overlapping classes</div></div>
+        </div>
+        <p class="body" style="margin-top: 12px;">That overlap is useful for the presentation because it gives us a reason to discuss why k matters. With Iris, the audience can see both a strong separation and a slightly ambiguous boundary in the same dataset.</p>
+      </div>
+      <div class="figure">
+        <img src="iris_scatter_plot.png" alt="Scatter plot of Iris petal length and width colored by species">
+        <div class="caption">Petal length versus petal width already shows a natural separation pattern, which is why this pair is the best visual anchor for the slide deck.</div>
+      </div>
+    </div>
+    <div class="footer"><span class="brand">Dataset fit</span><span class="page">02 / 06</span></div>
+  </section>
+
+  <section class="slide">
+    <div class="shell">
+      <span class="eyebrow">Preparation</span>
+      <h2>Cleaning was minimal, so the story stays on the model</h2>
+      <div class="timeline">
+        <div class="step"><div class="idx">01</div><div class="name">Load</div><div class="desc">Read the CSV and inspect the structure so the audience sees what kind of data we are working with.</div></div>
+        <div class="step"><div class="idx">02</div><div class="name">Clean</div><div class="desc">Remove the Id column because it is just a row index and does not help prediction.</div></div>
+        <div class="step"><div class="idx">03</div><div class="name">Split</div><div class="desc">Use seed 42 and a 60/40 train-test split so the result is reproducible.</div></div>
+        <div class="step"><div class="idx">04</div><div class="name">Scale</div><div class="desc">Standardize numeric measurements before KNN so distance is fair across features.</div></div>
+      </div>
+      <div class="grid-2">
+        <div class="panel tight">
+          <h3>What the slide should say</h3>
+          <ul class="compact-list">
+            <li>We kept preprocessing light because Iris is already clean.</li>
+            <li>The main model point is the KNN vote, not the data wrangling.</li>
+            <li>That keeps the deck easy to narrate in five minutes.</li>
+          </ul>
+        </div>
+        <div class="note">This slide is the bridge between the dataset and the model. It gives the audience enough context to trust the result without turning the presentation into a cleaning tutorial.</div>
+      </div>
+    </div>
+    <div class="footer"><span class="brand">Data prep</span><span class="page">03 / 06</span></div>
+  </section>
+
+  <section class="slide">
+    <div class="shell grid-2">
+      <div class="panel">
+        <span class="eyebrow">How KNN works</span>
+        <h2>KNN is a local vote among the nearest examples</h2>
+        <p class="lead">A new flower is classified by finding the k closest training flowers and letting them vote on the label.</p>
+        <p class="body">For Iris, this is easy to explain with the petal features: flowers with nearby measurements usually belong to the same species. The schematic on the right is better than a raw model printout for teaching the idea.</p>
+        <div class="note">The important message is not that KNN is magic. It is that the model learns from geometry: close points influence the answer more than distant points.</div>
+      </div>
+      <div class="panel">
+        <svg class="schematic" viewBox="0 0 640 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schematic of KNN neighborhood voting">
+          <rect x="0" y="0" width="640" height="420" rx="18" fill="#faf9f5"/>
+          <rect x="0" y="0" width="640" height="420" rx="18" fill="none" stroke="#e8e6dc"/>
+          <text x="28" y="34" fill="#1B365D" font-family="JetBrains Mono, Consolas, monospace" font-size="12" letter-spacing="2.5">SCHEMATIC · NEAREST NEIGHBOR VOTE</text>
+          <line x1="28" y1="48" x2="612" y2="48" stroke="#1B365D" stroke-width="1" opacity="0.7"/>
+
+          <circle cx="136" cy="292" r="10" fill="#C00000"/>
+          <circle cx="166" cy="260" r="10" fill="#C00000"/>
+          <circle cx="118" cy="246" r="10" fill="#C00000"/>
+          <circle cx="176" cy="322" r="10" fill="#C00000"/>
+          <circle cx="228" cy="280" r="10" fill="#2E8B57"/>
+          <circle cx="258" cy="248" r="10" fill="#2E8B57"/>
+          <circle cx="286" cy="286" r="10" fill="#2E8B57"/>
+          <circle cx="314" cy="252" r="10" fill="#2E8B57"/>
+          <circle cx="420" cy="158" r="10" fill="#1F4E79"/>
+          <circle cx="454" cy="188" r="10" fill="#1F4E79"/>
+          <circle cx="488" cy="162" r="10" fill="#1F4E79"/>
+          <circle cx="510" cy="214" r="10" fill="#1F4E79"/>
+
+          <circle cx="286" cy="250" r="18" fill="#EEF2F7" stroke="#1B365D" stroke-width="3"/>
+          <circle cx="286" cy="250" r="86" fill="none" stroke="#1B365D" stroke-width="2" stroke-dasharray="8 8" opacity="0.7"/>
+          <line x1="286" y1="250" x2="236" y2="278" stroke="#1B365D" stroke-width="2"/>
+          <line x1="286" y1="250" x2="261" y2="242" stroke="#1B365D" stroke-width="2"/>
+          <line x1="286" y1="250" x2="315" y2="252" stroke="#1B365D" stroke-width="2"/>
+          <text x="286" y="240" text-anchor="middle" fill="#1B365D" font-family="Charter, Georgia, serif" font-size="16" font-weight="500">new point</text>
+          <text x="286" y="265" text-anchor="middle" fill="#1B365D" font-family="JetBrains Mono, Consolas, monospace" font-size="11" letter-spacing="1.4">vote from closest points</text>
+
+          <text x="94" y="368" fill="#504e49" font-family="Charter, Georgia, serif" font-size="15">Iris-setosa</text>
+          <text x="238" y="368" fill="#504e49" font-family="Charter, Georgia, serif" font-size="15">Iris-versicolor</text>
+          <text x="434" y="368" fill="#504e49" font-family="Charter, Georgia, serif" font-size="15">Iris-virginica</text>
+        </svg>
+      </div>
+    </div>
+    <div class="footer"><span class="brand">Model intuition</span><span class="page">04 / 06</span></div>
+  </section>
+
+  <section class="slide">
+    <div class="shell">
+      <span class="eyebrow">Evaluation</span>
+      <h2>k = 5 is the static reference point for the baseline deck</h2>
+      <div class="result-grid">
+        <div class="result-figure">
+          <img src="knn_k_plots/knn_k_05.png" alt="KNN decision regions for k equals 5">
+        </div>
+        <div class="panel">
+          <h3>Metrics</h3>
+          <div class="metrics" style="grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 14px 0;">
+            <div class="metric"><div class="value">96.67%</div><div class="label">Accuracy</div></div>
+            <div class="metric"><div class="value">2</div><div class="label">Misclassified</div></div>
+          </div>
+          <table class="matrix">
+            <thead>
+              <tr><th></th><th>Iris-setosa</th><th>Iris-versicolor</th><th>Iris-virginica</th></tr>
+            </thead>
+            <tbody>
+              <tr><th>Iris-setosa</th><td>16</td><td>0</td><td>0</td></tr>
+              <tr><th>Iris-versicolor</th><td>0</td><td>19</td><td>2</td></tr>
+              <tr><th>Iris-virginica</th><td>0</td><td>0</td><td>23</td></tr>
+            </tbody>
+          </table>
+          <p class="k-note" style="margin-top: 12px;">This is the best single-slide summary of the model: the decision surface is smooth enough to generalize, but still local enough to respect the visible class structure.</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span class="brand">Best-k summary</span><span class="page">05 / 06</span></div>
+  </section>
+
+  <section class="slide">
+    <div class="shell grid-2">
+      <div class="panel">
+        <span class="eyebrow">Takeaway</span>
+        <h2>What the team should say at the end</h2>
+        <ul class="compact-list">
+          <li>Iris is a great teaching dataset because the classes are visible, but not perfectly trivial.</li>
+          <li>KNN works naturally here because similar flowers really do cluster together in feature space.</li>
+          <li>The confusion matrix and accuracy together show that the model is not only high-performing, but also easy to explain.</li>
+        </ul>
+      </div>
+      <div class="note">
+        Final line: our KNN model reached 96.67% accuracy on the test set, with the main errors happening around the boundary between versicolor and virginica.
+      </div>
+    </div>
+    <div class="footer"><span class="brand">Closing</span><span class="page">06 / 06</span></div>
+  </section>
+</main>
+</body>
+</html>

@@ -29,7 +29,6 @@ Talking point: "We used all four numeric measurements — sepal length, sepal wi
  
 6. Data Cleaning
 Removed the Id column, since it was just a row index/line number and had no predictive value.
-Removed a leftover Model column (set to NULL) that wasn't part of the analysis.
 Verified the structure of the dataset with str(df) to confirm variable types (numeric measurements + character species label) before modeling.
 Talking point: "Before modeling, we cleaned the data by removing the Id column, since it was only a row number and irrelevant to prediction. We also confirmed the variable types were correct using str()."
  
@@ -44,36 +43,34 @@ Talking point: "We set seed 42 for reproducibility and split the dataset randoml
 8. How KNN Works (in simple words)
 KNN (K-Nearest Neighbors) classifies a new flower by looking at the 'k' most similar flowers already in the training data (based on how close their measurements are).
 It then assigns the new flower to whichever species is most common among those neighbors — essentially a "vote."
-We trained the model with train(Species ~ ., data = training, method = "knn") from the caret package, which automatically tests different values of k and picks the best-performing one.
+We evaluated a range of odd k values and used the best-performing one for the final story, which turned out to be k = 5.
 Talking point: "KNN works by comparing a new flower's measurements to the closest matching flowers already in our training data, and then predicting the species that shows up most often among those neighbors — it's essentially a majority vote based on similarity."
  
 9. Value of K Selected by the Model
 k = 5
-Talking point: "The caret package automatically tested several k values using resampling and selected k = 5 as the best-performing option — meaning the model looks at the 5 closest flowers to make each prediction."
+Talking point: "After comparing several odd k values, we chose k = 5 because it gave the best balance between local detail and smooth generalization."
  
 10. Confusion Matrix Results
                     Reference
 Prediction        Iris-setosa  Iris-versicolor  Iris-virginica
   Iris-setosa            16               0               0
-  Iris-versicolor         0              19               1
-  Iris-virginica          0               0              24
-All 16 setosa and all 24 virginica test flowers were classified correctly.
-Out of 20 versicolor flowers, 19 were correct, and just 1 was misclassified as virginica — consistent with the known overlap between these two species.
-Talking point: "Our confusion matrix shows the model got every single setosa and virginica flower right. The only mistake was one versicolor flower predicted as virginica — which makes sense, since those two species are known to overlap."
+  Iris-versicolor         0              19               2
+  Iris-virginica          0               0              23
+All 16 setosa flowers were classified correctly.
+Out of 21 versicolor flowers, 19 were correct and 2 were misclassified as virginica, while all 23 virginica flowers were classified correctly.
+Talking point: "Our confusion matrix shows the model got all of the setosa flowers right, and the only errors were a couple of versicolor cases near the overlap with virginica."
  
 11. Accuracy of the Model
-Accuracy: 0.9833 (98.33%)
-95% Confidence Interval: (0.9106, 0.9996)
-Kappa: 0.9746
-Talking point: "Overall, the model achieved an accuracy of 98.33% on the test set — an extremely high result, showing that KNN handled this classification task very well."
+Accuracy: 0.9667 (96.67%)
+Talking point: "Overall, the model achieved an accuracy of 96.67% on the test set — a strong result that still leaves room to explain where the classes overlap."
  
 12. What Our Team Learned
 KNN is a simple but powerful algorithm for classification problems, especially when classes are well separated (like setosa) — but it can still struggle slightly where classes overlap (versicolor vs. virginica).
 Small, clean, well-labeled datasets like Iris make it easier to isolate and understand modeling concepts (train/test split, resampling, evaluation metrics) without the noise of messy data.
-Evaluation metrics like the confusion matrix, accuracy, and Kappa give a fuller picture of model performance than accuracy alone — e.g., Kappa here (0.9746) confirms the high accuracy isn't just due to class imbalance.
-Talking point: "This project taught us how a simple algorithm like KNN can achieve near-perfect results on well-behaved data, and how important it is to use multiple metrics — not just accuracy — to properly evaluate a model."
+Evaluation metrics like the confusion matrix and accuracy give a fuller picture of model performance than a single headline number alone.
+Talking point: "This project showed us how a simple algorithm like KNN can perform very well on a clean dataset, and how the overlap between versicolor and virginica makes the choice of k matter."
  
 Closing
-Talking point: "In summary, our KNN model, trained on 60% of the Iris dataset, achieved 98.33% accuracy on the test set, correctly identifying nearly every flower species based on just four simple measurements."
+Talking point: "In summary, our KNN model, trained on 60% of the Iris dataset, achieved 96.67% accuracy on the test set and correctly identified almost every flower species based on just four simple measurements."
  
 

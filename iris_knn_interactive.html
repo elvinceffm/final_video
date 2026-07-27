@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iris KNN - Interactive Deck</title>
+  <link rel="stylesheet" href="iris_knn_deck.css">
+</head>
+<body>
+<main class="deck" aria-label="Iris KNN interactive slide deck">
+  <section class="slide">
+    <div class="shell">
+      <div class="eyebrow">Iris Species · KNN classification</div>
+      <div class="bar"></div>
+      <h1 class="title">How KNN separates three flower species</h1>
+      <p class="subtitle">A browser-first slide deck with a live k slider, precomputed decision boundaries, and a compact explanation of how the vote changes as k grows.</p>
+      <div class="tagline">
+        <span class="chip">Interactive HTML</span>
+        <span class="chip">Precomputed k sweep</span>
+        <span class="chip">3 classes</span>
+        <span class="chip">No PDF dependency</span>
+      </div>
+      <div class="metrics">
+        <div class="metric"><div class="value">150</div><div class="label">Rows</div></div>
+        <div class="metric"><div class="value">3</div><div class="label">Species</div></div>
+        <div class="metric"><div class="value">4</div><div class="label">Predictors</div></div>
+        <div class="metric"><div class="value">1-15</div><div class="label">Slider range</div></div>
+      </div>
+    </div>
+    <div class="footer"><span class="brand">Kami-inspired interactive deck</span><span class="page">01 / 06</span></div>
+  </section>
+
+  <section class="slide">
+    <div class="shell grid-2">
+      <div class="panel">
+        <span class="eyebrow">Dataset</span>
+        <h2>Three iris species, one very explainable classification story</h2>
+        <p class="lead">The Iris dataset is small, balanced, and visually separable enough to make KNN easy to teach without losing realism.</p>
+        <div class="metrics" style="grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 8px;">
+          <div class="metric"><div class="value">Setosa</div><div class="label">Strong separation</div></div>
+          <div class="metric"><div class="value">Versicolor / Virginica</div><div class="label">Useful overlap</div></div>
+        </div>
+        <p class="body" style="margin-top: 12px;">That overlap matters because it creates a boundary worth discussing. If every class were perfectly isolated, the k slider would be visually boring.</p>
+      </div>
+      <div class="figure">
+        <img src="iris_scatter_plot.png" alt="Scatter plot of Iris petal length and width colored by species">
+        <div class="caption">Petal length and petal width are the clearest pair for the story, so the deck uses them again in the KNN decision-region slide.</div>
+      </div>
+    </div>
+    <div class="footer"><span class="brand">Dataset fit</span><span class="page">02 / 06</span></div>
+  </section>
+
+  <section class="slide">
+    <div class="shell">
+      <span class="eyebrow">Preparation</span>
+      <h2>Cleaning was minimal, so the slide deck can focus on the model</h2>
+      <div class="timeline">
+        <div class="step"><div class="idx">01</div><div class="name">Load</div><div class="desc">Read the CSV and inspect the data types to establish the starting point.</div></div>
+        <div class="step"><div class="idx">02</div><div class="name">Clean</div><div class="desc">Drop the Id column because it is only an index, not a predictor.</div></div>
+        <div class="step"><div class="idx">03</div><div class="name">Split</div><div class="desc">Use seed 42 and a 60/40 train-test split so the result is reproducible.</div></div>
+        <div class="step"><div class="idx">04</div><div class="name">Scale</div><div class="desc">Standardize the measurements before KNN so distances are comparable.</div></div>
+      </div>
+      <div class="grid-2">
+        <div class="panel tight">
+          <h3>What the audience should take away</h3>
+          <ul class="compact-list">
+            <li>The dataset is already clean, so preprocessing stays lightweight.</li>
+            <li>The presentation stays centered on KNN, not on data repair.</li>
+            <li>That is the right scope for a 5-minute project video.</li>
+          </ul>
+        </div>
+        <div class="note">This slide is the bridge between the dataset and the model. It keeps the narrative honest and concise before the more visual KNN explanation slides.</div>
+      </div>
+    </div>
+    <div class="footer"><span class="brand">Data prep</span><span class="page">03 / 06</span></div>
+  </section>
+
+  <section class="slide">
+    <div class="shell grid-2">
+      <div class="panel">
+        <span class="eyebrow">How KNN works</span>
+        <h2>KNN is a local vote among the nearest examples</h2>
+        <p class="lead">A new flower gets the label most common among the k closest training flowers.</p>
+        <p class="body">The manual schematic is better than a raw output table for teaching the idea. It shows that KNN is really a geometric vote, not a mysterious black box.</p>
+        <div class="note">The audience should understand the rule in one sentence: nearby points matter more than faraway points, and the majority class among the nearest neighbors wins.</div>
+      </div>
+      <div class="panel">
+        <svg class="schematic" viewBox="0 0 640 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schematic of KNN neighborhood voting">
+          <rect x="0" y="0" width="640" height="420" rx="18" fill="#faf9f5"/>
+          <rect x="0" y="0" width="640" height="420" rx="18" fill="none" stroke="#e8e6dc"/>
+          <text x="28" y="34" fill="#1B365D" font-family="JetBrains Mono, Consolas, monospace" font-size="12" letter-spacing="2.5">SCHEMATIC · NEAREST NEIGHBOR VOTE</text>
+          <line x1="28" y1="48" x2="612" y2="48" stroke="#1B365D" stroke-width="1" opacity="0.7"/>
+
+          <circle cx="136" cy="292" r="10" fill="#C00000"/>
+          <circle cx="166" cy="260" r="10" fill="#C00000"/>
+          <circle cx="118" cy="246" r="10" fill="#C00000"/>
+          <circle cx="176" cy="322" r="10" fill="#C00000"/>
+          <circle cx="228" cy="280" r="10" fill="#2E8B57"/>
+          <circle cx="258" cy="248" r="10" fill="#2E8B57"/>
+          <circle cx="286" cy="286" r="10" fill="#2E8B57"/>
+          <circle cx="314" cy="252" r="10" fill="#2E8B57"/>
+          <circle cx="420" cy="158" r="10" fill="#1F4E79"/>
+          <circle cx="454" cy="188" r="10" fill="#1F4E79"/>
+          <circle cx="488" cy="162" r="10" fill="#1F4E79"/>
+          <circle cx="510" cy="214" r="10" fill="#1F4E79"/>
+
+          <circle cx="286" cy="250" r="18" fill="#EEF2F7" stroke="#1B365D" stroke-width="3"/>
+          <circle cx="286" cy="250" r="86" fill="none" stroke="#1B365D" stroke-width="2" stroke-dasharray="8 8" opacity="0.7"/>
+          <line x1="286" y1="250" x2="236" y2="278" stroke="#1B365D" stroke-width="2"/>
+          <line x1="286" y1="250" x2="261" y2="242" stroke="#1B365D" stroke-width="2"/>
+          <line x1="286" y1="250" x2="315" y2="252" stroke="#1B365D" stroke-width="2"/>
+          <text x="286" y="240" text-anchor="middle" fill="#1B365D" font-family="Charter, Georgia, serif" font-size="16" font-weight="500">new point</text>
+          <text x="286" y="265" text-anchor="middle" fill="#1B365D" font-family="JetBrains Mono, Consolas, monospace" font-size="11" letter-spacing="1.4">vote from closest points</text>
+
+          <text x="94" y="368" fill="#504e49" font-family="Charter, Georgia, serif" font-size="15">Iris-setosa</text>
+          <text x="238" y="368" fill="#504e49" font-family="Charter, Georgia, serif" font-size="15">Iris-versicolor</text>
+          <text x="434" y="368" fill="#504e49" font-family="Charter, Georgia, serif" font-size="15">Iris-virginica</text>
+        </svg>
+      </div>
+    </div>
+    <div class="footer"><span class="brand">Model intuition</span><span class="page">04 / 06</span></div>
+  </section>
+
+  <section class="slide" id="k-slide">
+    <div class="shell">
+      <span class="eyebrow">Interactive k selection</span>
+      <h2>Move the slider to see why k = 5 is the chosen balance</h2>
+      <div class="result-grid">
+        <div class="slider-wrap">
+          <div class="slider-top">
+            <div>
+              <div class="slider-label">Selected k</div>
+              <div class="k-display" id="kValue">5</div>
+            </div>
+            <div class="k-note" id="kNote">Moderate neighborhood size: enough smoothing to generalize, but still close enough to respect the class boundary.</div>
+          </div>
+          <input id="kSlider" type="range" min="1" max="15" step="2" value="5" aria-label="Choose k value">
+          <div class="k-quick" aria-label="Quick k choices">
+            <button data-k="1">k=1</button>
+            <button data-k="3">k=3</button>
+            <button data-k="5" class="is-active">k=5</button>
+            <button data-k="7">k=7</button>
+            <button data-k="9">k=9</button>
+            <button data-k="11">k=11</button>
+            <button data-k="13">k=13</button>
+            <button data-k="15">k=15</button>
+          </div>
+          <div class="metrics" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
+            <div class="metric"><div class="value" id="accuracyValue">96.67%</div><div class="label">Accuracy</div></div>
+            <div class="metric"><div class="value" id="errorValue">2</div><div class="label">Misclassified</div></div>
+          </div>
+          <table class="matrix" aria-label="Confusion matrix">
+            <thead>
+              <tr><th></th><th>Iris-setosa</th><th>Iris-versicolor</th><th>Iris-virginica</th></tr>
+            </thead>
+            <tbody>
+              <tr><th>Iris-setosa</th><td id="m00">16</td><td id="m01">0</td><td id="m02">0</td></tr>
+              <tr><th>Iris-versicolor</th><td id="m10">0</td><td id="m11">19</td><td id="m12">2</td></tr>
+              <tr><th>Iris-virginica</th><td id="m20">0</td><td id="m21">0</td><td id="m22">23</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="result-figure">
+          <img id="decisionImage" src="knn_k_plots/knn_k_05.png" alt="KNN decision regions for k equals 5">
+          <div class="caption" id="decisionCaption">The boundary is already smooth enough at k = 5 to separate setosa cleanly while still preserving the versicolor / virginica transition area.</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span class="brand">k slider</span><span class="page">05 / 06</span></div>
+  </section>
+
+  <section class="slide">
+    <div class="shell grid-2">
+      <div class="panel">
+        <span class="eyebrow">Takeaway</span>
+        <h2>What the team should say at the end</h2>
+        <ul class="compact-list">
+          <li>Iris is a good teaching dataset because the structure is visible but not trivial.</li>
+          <li>KNN works naturally here because the classes cluster in feature space.</li>
+          <li>The confusion matrix and accuracy together make the result easy to defend.</li>
+        </ul>
+      </div>
+      <div class="note">
+        Final line: our KNN model reached 96.67% accuracy on the test set, with the main errors appearing near the versicolor and virginica boundary.
+      </div>
+    </div>
+    <div class="footer"><span class="brand">Closing</span><span class="page">06 / 06</span></div>
+  </section>
+</main>
+
+<script>
+  const K_DATA = {
+    1: {
+      accuracy: 0.966666666666667,
+      misclassified: 2,
+      matrix: [[16, 0, 0], [0, 19, 2], [0, 0, 23]],
+      image: "knn_k_plots/knn_k_01.png",
+      note: "k = 1 is highly local. It preserves detail, but it can overreact to a single nearby point.",
+      caption: "At k = 1 the boundary is very jagged, which is useful for seeing local detail but not ideal for stable generalization."
+    },
+    3: {
+      accuracy: 0.966666666666667,
+      misclassified: 2,
+      matrix: [[16, 0, 0], [0, 19, 2], [0, 0, 23]],
+      image: "knn_k_plots/knn_k_03.png",
+      note: "k = 3 starts to smooth the boundary while still staying close to the data.",
+      caption: "k = 3 removes some of the roughness while keeping the boundary local."
+    },
+    5: {
+      accuracy: 0.966666666666667,
+      misclassified: 2,
+      matrix: [[16, 0, 0], [0, 19, 2], [0, 0, 23]],
+      image: "knn_k_plots/knn_k_05.png",
+      note: "Moderate neighborhood size: enough smoothing to generalize, but still close enough to respect the class boundary.",
+      caption: "The boundary is already smooth enough at k = 5 to separate setosa cleanly while still preserving the versicolor / virginica transition area."
+    },
+    7: {
+      accuracy: 0.966666666666667,
+      misclassified: 2,
+      matrix: [[16, 0, 0], [0, 19, 2], [0, 0, 23]],
+      image: "knn_k_plots/knn_k_07.png",
+      note: "k = 7 is still strong, but it is moving toward a smoother boundary.",
+      caption: "k = 7 looks similar to k = 5, but the class regions are slightly more smoothed."
+    },
+    9: {
+      accuracy: 0.966666666666667,
+      misclassified: 2,
+      matrix: [[16, 0, 0], [0, 19, 2], [0, 0, 23]],
+      image: "knn_k_plots/knn_k_09.png",
+      note: "k = 9 is a reasonable upper-middle option, but the boundary is getting less local.",
+      caption: "k = 9 is still accurate, but the map is beginning to soften around the overlap region."
+    },
+    11: {
+      accuracy: 0.95,
+      misclassified: 3,
+      matrix: [[16, 0, 0], [0, 18, 1], [0, 2, 23]],
+      image: "knn_k_plots/knn_k_11.png",
+      note: "k = 11 smooths more aggressively and starts to merge some of the boundary detail.",
+      caption: "k = 11 is smoother, but it begins to miss more of the subtle boundary between versicolor and virginica."
+    },
+    13: {
+      accuracy: 0.95,
+      misclassified: 3,
+      matrix: [[16, 0, 0], [0, 18, 1], [0, 2, 23]],
+      image: "knn_k_plots/knn_k_13.png",
+      note: "k = 13 continues the smoothing trend and loses a bit more of the class detail.",
+      caption: "k = 13 looks stable, but the boundary is now noticeably more generalized."
+    },
+    15: {
+      accuracy: 0.95,
+      misclassified: 3,
+      matrix: [[16, 0, 0], [0, 18, 1], [0, 2, 23]],
+      image: "knn_k_plots/knn_k_15.png",
+      note: "k = 15 is the smoothest option in this deck, but it starts to underfit the overlap region.",
+      caption: "At k = 15 the decision regions are quite smooth, but the model is less responsive to local structure."
+    }
+  };
+
+  const slider = document.getElementById('kSlider');
+  const kValue = document.getElementById('kValue');
+  const accuracyValue = document.getElementById('accuracyValue');
+  const errorValue = document.getElementById('errorValue');
+  const decisionImage = document.getElementById('decisionImage');
+  const decisionCaption = document.getElementById('decisionCaption');
+  const kNote = document.getElementById('kNote');
+  const quickButtons = Array.from(document.querySelectorAll('.k-quick button'));
+  const matrixIds = [
+    ['m00', 'm01', 'm02'],
+    ['m10', 'm11', 'm12'],
+    ['m20', 'm21', 'm22']
+  ];
+
+  function formatAccuracy(value) {
+    return `${(value * 100).toFixed(2)}%`;
+  }
+
+  function updateK(value) {
+    const data = K_DATA[value];
+    if (!data) return;
+    kValue.textContent = String(value);
+    accuracyValue.textContent = formatAccuracy(data.accuracy);
+    errorValue.textContent = String(data.misclassified);
+    decisionImage.src = data.image;
+    decisionCaption.textContent = data.caption;
+    kNote.textContent = data.note;
+
+    matrixIds.forEach((row, rowIndex) => {
+      row.forEach((cellId, colIndex) => {
+        document.getElementById(cellId).textContent = String(data.matrix[rowIndex][colIndex]);
+      });
+    });
+
+    quickButtons.forEach((button) => {
+      button.classList.toggle('is-active', Number(button.dataset.k) === value);
+    });
+  }
+
+  slider.addEventListener('input', (event) => {
+    updateK(Number(event.target.value));
+  });
+
+  quickButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      slider.value = button.dataset.k;
+      updateK(Number(button.dataset.k));
+    });
+  });
+
+  updateK(Number(slider.value));
+</script>
+</body>
+</html>
