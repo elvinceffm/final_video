@@ -43,19 +43,20 @@ body {
   min-height: 100vh;
   scroll-snap-align: start;
   position: relative;
-  padding: 56px 72px 56px;
+  padding: 40px 72px 56px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 
 .shell {
   width: min(1280px, 100%);
-  min-height: calc(100vh - 112px);
+  min-height: calc(100vh - 96px);
+  padding-top: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 22px;
+  justify-content: flex-start;
+  gap: 28px;
 }
 
 .eyebrow {
@@ -81,6 +82,15 @@ body {
   line-height: 1.45;
   color: var(--olive);
   max-width: 52ch;
+}
+
+.slide-headline {
+  margin: 0;
+  font-size: clamp(30px, 3.2vw, 46px);
+  line-height: 1.08;
+  font-weight: 500;
+  letter-spacing: -0.6px;
+  max-width: 16ch;
 }
 
 .kicker {
@@ -113,6 +123,7 @@ body {
   grid-template-columns: 1.03fr 0.97fr;
   gap: 28px;
   align-items: stretch;
+  align-content: start;
 }
 
 .grid-3 {
@@ -125,12 +136,12 @@ body {
   background: rgba(250, 249, 245, 0.82);
   border: 1px solid var(--border);
   border-radius: 20px;
-  padding: 24px;
+  padding: 28px;
   box-shadow: var(--shadow);
 }
 
 .panel.tight {
-  padding: 18px 20px;
+  padding: 20px 22px;
 }
 
 .panel h2, .panel h3 {
@@ -173,14 +184,14 @@ body {
 .metrics {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
+  gap: 14px;
 }
 
 .metric {
   background: var(--ivory);
   border: 1px solid var(--border);
   border-radius: 16px;
-  padding: 16px;
+  padding: 18px;
 }
 
 .metric .value {
@@ -203,7 +214,7 @@ body {
   background: var(--ivory);
   border: 1px solid var(--border);
   border-radius: 20px;
-  padding: 18px;
+  padding: 20px;
   box-shadow: var(--shadow);
 }
 
@@ -223,15 +234,15 @@ body {
 .timeline {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
+  gap: 18px;
 }
 
 .step {
   background: var(--ivory);
   border: 1px solid var(--border);
   border-radius: 18px;
-  padding: 18px;
-  min-height: 150px;
+  padding: 22px;
+  min-height: 184px;
 }
 
 .step .idx {
@@ -247,7 +258,7 @@ body {
   line-height: 1.15;
   font-weight: 500;
   color: var(--near-black);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .step .desc {
@@ -266,7 +277,7 @@ body {
   background: #EEF2F7;
   border-left: 3px solid var(--brand);
   border-radius: 12px;
-  padding: 14px 16px;
+  padding: 16px 18px;
   color: var(--dark-warm);
   font-size: 15px;
   line-height: 1.55;
@@ -304,8 +315,8 @@ body {
 
 .slider-wrap {
   display: grid;
-  gap: 14px;
-  padding: 18px;
+  gap: 16px;
+  padding: 20px;
   border-radius: 18px;
   background: var(--ivory);
   border: 1px solid var(--border);
@@ -315,7 +326,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 18px;
+}
+
+.slider-top > div:first-child {
+  flex: 0 0 108px;
 }
 
 .slider-label {
@@ -324,6 +339,7 @@ body {
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--stone);
+  white-space: nowrap;
 }
 
 .k-display {
@@ -331,6 +347,7 @@ body {
   line-height: 1;
   font-weight: 500;
   color: var(--brand);
+  white-space: nowrap;
 }
 
 input[type="range"] {
@@ -366,12 +383,16 @@ input[type="range"] {
   color: var(--olive);
   font-size: 14px;
   line-height: 1.5;
+  min-height: 4.5em;
+  display: flex;
+  align-items: center;
+  min-width: 0;
 }
 
 .result-grid {
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
-  gap: 18px;
+  gap: 20px;
   align-items: start;
 }
 
@@ -379,13 +400,19 @@ input[type="range"] {
   background: var(--ivory);
   border: 1px solid var(--border);
   border-radius: 18px;
-  padding: 16px;
+  padding: 20px;
 }
 
 .result-figure img {
   display: block;
   width: 100%;
   border-radius: 12px;
+}
+
+.result-figure .caption {
+  min-height: 4.5em;
+  display: flex;
+  align-items: center;
 }
 
 .footer {
@@ -447,7 +474,20 @@ input[type="range"] {
 }
 
 .compact-list li + li {
-  margin-top: 8px;
+  margin-top: 10px;
+}
+
+.schematic text {
+  paint-order: stroke;
+  stroke: #faf9f5;
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
+.schematic .annotation {
+  fill: #faf9f5;
+  stroke: #e8e6dc;
+  stroke-width: 1;
 }
 
 @media (max-width: 1000px) {
@@ -457,6 +497,9 @@ input[type="range"] {
   .grid-2, .grid-3, .timeline, .metrics, .result-grid {
     grid-template-columns: 1fr;
   }
+  .shell { padding-top: 0; }
+  .result-figure .caption,
+  .k-note { min-height: auto; }
   .footer {
     left: 20px;
     right: 20px;

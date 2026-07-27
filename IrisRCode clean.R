@@ -140,7 +140,14 @@ make_decision_plot <- function(k_value) {
             x = "Petal Length (cm)",
             y = "Petal Width (cm)"
         ) +
-        theme_minimal()
+        theme_minimal() +
+        theme(
+            plot.background = element_rect(fill = "#faf9f5", color = NA),
+            panel.background = element_rect(fill = "#faf9f5", color = NA),
+            legend.background = element_rect(fill = "#faf9f5", color = NA),
+            legend.key = element_rect(fill = "#faf9f5", color = NA),
+            panel.grid.minor = element_blank()
+        )
 }
 
 dir.create("knn_k_plots", showWarnings = FALSE)
@@ -162,7 +169,14 @@ scatter_plot <- ggplot(training, aes(x = PetalLengthCm, y = PetalWidthCm, color 
     geom_point(size = 3) +
     labs(title = "Iris Species Scatter Plot", x = "Petal Length (cm)", y = "Petal Width (cm)") +
     scale_color_manual(values = c("Iris-setosa" = "#C00000", "Iris-versicolor" = "#2E8B57", "Iris-virginica" = "#1F4E79")) +
-    theme_minimal()
+    theme_minimal() +
+    theme(
+        plot.background = element_rect(fill = "#faf9f5", color = NA),
+        panel.background = element_rect(fill = "#faf9f5", color = NA),
+        legend.background = element_rect(fill = "#faf9f5", color = NA),
+        legend.key = element_rect(fill = "#faf9f5", color = NA),
+        panel.grid.minor = element_blank()
+    )
 
 print(scatter_plot)
 ggsave("iris_scatter_plot.png", scatter_plot, width = 8, height = 6, dpi = 300)

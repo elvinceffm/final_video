@@ -10,14 +10,16 @@
 <main class="deck" aria-label="Iris KNN interactive slide deck">
   <section class="slide">
     <div class="shell">
+    <span class="eyebrow">Overview</span>
+    <h2 class="slide-headline">A clean, balanced KNN story with one live control</h2>
       <div class="eyebrow">Iris Species · KNN classification</div>
       <div class="bar"></div>
-      <h1 class="title">How KNN separates three flower species</h1>
-      <p class="subtitle">A browser-first slide deck with a live k slider, precomputed decision boundaries, and a compact explanation of how the vote changes as k grows.</p>
+          <li>KNN works naturally here because similar flowers really do cluster together in feature space.</li>
+          <li>Because it is accurate, simple, and easy to explain, KNN is the better choice than a CNN for this kind of flower recognition task.</li>
       <div class="tagline">
         <span class="chip">Interactive HTML</span>
         <span class="chip">Precomputed k sweep</span>
-        <span class="chip">3 classes</span>
+        Final line: this result is a strong case for KNN over CNN on a small, well-structured flower dataset, because it already meets the target without adding deep-learning complexity.
         <span class="chip">No PDF dependency</span>
       </div>
       <div class="metrics">
@@ -32,6 +34,10 @@
 
   <section class="slide">
     <div class="shell grid-2">
+      <div style="grid-column: 1 / -1;">
+        <span class="eyebrow">Dataset fit</span>
+        <h2 class="slide-headline">Why Iris is a strong KNN teaching dataset</h2>
+      </div>
       <div class="panel">
         <span class="eyebrow">Dataset</span>
         <h2>Three iris species, one very explainable classification story</h2>
@@ -53,7 +59,7 @@
   <section class="slide">
     <div class="shell">
       <span class="eyebrow">Preparation</span>
-      <h2>Cleaning was minimal, so the slide deck can focus on the model</h2>
+      <h2 class="slide-headline">Cleaning was minimal, so the slide deck can focus on the model</h2>
       <div class="timeline">
         <div class="step"><div class="idx">01</div><div class="name">Load</div><div class="desc">Read the CSV and inspect the data types to establish the starting point.</div></div>
         <div class="step"><div class="idx">02</div><div class="name">Clean</div><div class="desc">Drop the Id column because it is only an index, not a predictor.</div></div>
@@ -77,9 +83,13 @@
 
   <section class="slide">
     <div class="shell grid-2">
+      <div style="grid-column: 1 / -1;">
+        <span class="eyebrow">Model intuition</span>
+        <h2 class="slide-headline">How KNN turns nearby flowers into a vote</h2>
+      </div>
       <div class="panel">
         <span class="eyebrow">How KNN works</span>
-        <h2>KNN is a local vote among the nearest examples</h2>
+        <h2 class="slide-headline">KNN is a local vote among the nearest examples</h2>
         <p class="lead">A new flower gets the label most common among the k closest training flowers.</p>
         <p class="body">The manual schematic is better than a raw output table for teaching the idea. It shows that KNN is really a geometric vote, not a mysterious black box.</p>
         <div class="note">The audience should understand the rule in one sentence: nearby points matter more than faraway points, and the majority class among the nearest neighbors wins.</div>
@@ -109,8 +119,10 @@
           <line x1="286" y1="250" x2="236" y2="278" stroke="#1B365D" stroke-width="2"/>
           <line x1="286" y1="250" x2="261" y2="242" stroke="#1B365D" stroke-width="2"/>
           <line x1="286" y1="250" x2="315" y2="252" stroke="#1B365D" stroke-width="2"/>
-          <text x="286" y="240" text-anchor="middle" fill="#1B365D" font-family="Charter, Georgia, serif" font-size="16" font-weight="500">new point</text>
-          <text x="286" y="265" text-anchor="middle" fill="#1B365D" font-family="JetBrains Mono, Consolas, monospace" font-size="11" letter-spacing="1.4">vote from closest points</text>
+          <rect x="244" y="214" width="84" height="34" rx="10" class="annotation" opacity="0.95"/>
+          <text x="286" y="236" text-anchor="middle" fill="#1B365D" font-family="Charter, Georgia, serif" font-size="16" font-weight="500">new point</text>
+          <rect x="196" y="264" width="182" height="34" rx="10" class="annotation" opacity="0.95"/>
+          <text x="287" y="286" text-anchor="middle" fill="#1B365D" font-family="JetBrains Mono, Consolas, monospace" font-size="11" letter-spacing="1.4">vote from closest points</text>
 
           <text x="94" y="368" fill="#504e49" font-family="Charter, Georgia, serif" font-size="15">Iris-setosa</text>
           <text x="238" y="368" fill="#504e49" font-family="Charter, Georgia, serif" font-size="15">Iris-versicolor</text>
@@ -124,7 +136,7 @@
   <section class="slide" id="k-slide">
     <div class="shell">
       <span class="eyebrow">Interactive k selection</span>
-      <h2>Move the slider to see why k = 5 is the chosen balance</h2>
+      <h2 class="slide-headline">Move the slider to see why k = 5 is the chosen balance</h2>
       <div class="result-grid">
         <div class="slider-wrap">
           <div class="slider-top">
@@ -171,17 +183,21 @@
 
   <section class="slide">
     <div class="shell grid-2">
+      <div style="grid-column: 1 / -1;">
+        <span class="eyebrow">Closing</span>
+        <h2 class="slide-headline">What the final KNN result says about the data</h2>
+      </div>
       <div class="panel">
         <span class="eyebrow">Takeaway</span>
-        <h2>What the team should say at the end</h2>
+        <h2 class="slide-headline">What the team should say at the end</h2>
         <ul class="compact-list">
           <li>Iris is a good teaching dataset because the structure is visible but not trivial.</li>
-          <li>KNN works naturally here because the classes cluster in feature space.</li>
-          <li>The confusion matrix and accuracy together make the result easy to defend.</li>
+          <li>KNN works naturally here because similar flowers really do cluster together in feature space.</li>
+          <li>Because it is accurate, simple, and easy to explain, KNN is the better choice than a CNN for this kind of flower recognition task.</li>
         </ul>
       </div>
       <div class="note">
-        Final line: our KNN model reached 96.67% accuracy on the test set, with the main errors appearing near the versicolor and virginica boundary.
+        Final line: this result is a strong case for KNN over CNN on a small, well-structured flower dataset, because it already meets the target without adding deep-learning complexity.
       </div>
     </div>
     <div class="footer"><span class="brand">Closing</span><span class="page">06 / 06</span></div>
