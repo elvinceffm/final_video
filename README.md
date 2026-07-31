@@ -1,0 +1,1 @@
+Upon cloning the repository, opening the respective slide-deck (interactive and baseline version) locally by means of any browser of your convenience will be sufficient. Use full screen mode for optimal experience. 
